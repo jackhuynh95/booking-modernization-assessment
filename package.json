@@ -1,0 +1,20 @@
+{
+  "name": "robot-fleet-dashboard",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Real-time robot fleet management dashboard with Node.js, Next.js, MongoDB, and uWebSockets.js.",
+  "scripts": {
+    "dev:backend": "npm --prefix apps/backend run dev",
+    "dev:frontend": "npm --prefix apps/frontend run dev",
+    "dev:simulator": "npm --prefix apps/backend run simulator",
+    "start:backend": "npm --prefix apps/backend start",
+    "build:frontend": "npm --prefix apps/frontend run build",
+    "lint:frontend": "npm --prefix apps/frontend run lint",
+    "compose:up": "docker compose up -d",
+    "compose:down": "docker compose down",
+    "compose:config": "docker compose config --quiet"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

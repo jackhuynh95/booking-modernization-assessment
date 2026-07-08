@@ -1,0 +1,79 @@
+services:
+  mongo:
+    image: mongo:7
+    container_name: robot-fleet-mongo
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - robot_fleet_mongo_data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping').ok"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build:
+      context: ./apps/backend
+    image: robot-fleet-backend:latest
+    container_name: robot-fleet-backend
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      PORT: 8080
+      MONGODB_URI: mongodb://mongo:27017/robot-fleet-dashboard
+      WORKERS: ${WORKERS:-}
+    ports:
+      - "8080:8080"
+    command: sh -lc "${BACKEND_COMMAND:-npm start}"
+    healthcheck:
+      test: ["CMD-SHELL", "node -e \"fetch('http://127.0.0.1:8080/api/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))\""]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    depends_on:
+      mongo:
+        condition: service_healthy
+
+  frontend:
+    build:
+      context: ./apps/frontend
+      args:
+        NEXT_PUBLIC_BACKEND_HTTP_URL: http://localhost:8080
+        NEXT_PUBLIC_DASHBOARD_WS_URL: ws://localhost:8080/dashboard
+    image: robot-fleet-frontend:latest
+    container_name: robot-fleet-frontend
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      API_BASE_URL: http://backend:8080/api
+      NEXT_PUBLIC_BACKEND_HTTP_URL: http://localhost:8080
+      NEXT_PUBLIC_DASHBOARD_WS_URL: ws://localhost:8080/dashboard
+    ports:
+      - "3000:3000"
+    healthcheck:
+      test: ["CMD-SHELL", "node -e \"fetch('http://127.0.0.1:3000').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))\""]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    depends_on:
+      backend:
+        condition: service_healthy
+
+  simulator:
+    build:
+      context: ./apps/backend
+    image: robot-fleet-backend:latest
+    container_name: robot-fleet-simulator
+    restart: unless-stopped
+    environment:
+      SIMULATOR_WS_URL: ws://backend:8080
+      SIMULATOR_ROBOT_COUNT: 5
+    command: npm run simulator
+    depends_on:
+      backend:
+        condition: service_healthy
+
+volumes:
+  robot_fleet_mongo_data:

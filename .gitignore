@@ -1,0 +1,63 @@
+# OS/editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+*.sw?
+
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.p12
+*.pfx
+
+# .NET build output
+bin/
+obj/
+TestResults/
+*.user
+*.suo
+*.rsuser
+*.nupkg
+
+# NuGet/local package cache artifacts
+packages/
+*.snupkg
+
+# Logs and temporary files
+logs/
+*.log
+tmp/
+temp/
+*.tmp
+*.bak
+*.backup
+
+# Coverage/reports
+coverage/
+*.coverage
+*.coveragexml
+coverage.cobertura.xml
+htmlcov/
+
+# Generated assessment artifacts
+dist/
+out/
+exports/
+*.draft.pdf
+
+# Codex and local agent runtime
+.codex/*
+!.codex/skills/
+!.codex/skills/**
+.agents/
+.auto-claude/
+.pi-code/sessions/
+
+# Repomix
+repomix-output.xml
+.repomixignore
