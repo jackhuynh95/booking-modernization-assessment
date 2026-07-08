@@ -8,8 +8,8 @@ This roadmap runs from assessment understanding through final PDF export and sub
 
 | Phase | Status | Deliverable | Exit Criteria |
 | --- | --- | --- | --- |
-| 1. Understand assessment and assumptions | In progress | `docs/assessment-brief.md` | Constraints, assumptions, non-goals, and unknowns captured. |
-| 2. Booking microservice structure | Not started | `docs/architecture.md` | Service boundary, responsibilities, data ownership, dependencies, and migration approach proposed. |
+| 1. Understand assessment and assumptions | Complete | `docs/assessment-brief.md` | Constraints, assumptions, non-goals, and unknowns captured. |
+| 2. Booking microservice structure | Complete | `docs/architecture.md` | Service boundary, responsibilities, data ownership, dependencies, and migration approach proposed. |
 | 3. API contract | Not started | `docs/api-contract.md` | Core REST endpoints, request/response shapes, status codes, validation, and error model drafted. |
 | 4. Event definitions | Not started | `docs/events.md` | Booking event list, schemas, producers/consumers, ordering, and versioning strategy drafted. |
 | 5. Idempotency and eventual consistency | Not started | `docs/idempotency.md` | Idempotency keys, deduplication, retries, outbox/inbox, reconciliation, and consistency tradeoffs defined. |
@@ -21,14 +21,14 @@ This roadmap runs from assessment understanding through final PDF export and sub
 
 ## Immediate Next Goal
 
-Start Phase 2 by proposing the booking microservice structure:
+Start Phase 3 by drafting the booking API contract:
 
-- bounded context and service responsibilities;
-- owned data model at conceptual level;
-- legacy integration points;
-- dependency flow;
-- migration approach;
-- risks and tradeoffs.
+- REST endpoint list;
+- command request shapes;
+- query response shapes;
+- validation and status code conventions;
+- idempotency key usage;
+- contract assumptions for legacy and downstream integrations.
 
 ## Definition Of Done For Foundation
 
@@ -37,7 +37,7 @@ Start Phase 2 by proposing the booking microservice structure:
 - Repo identity is booking/PhoenixDX/PDF-only.
 - Old unrelated runtime config is removed.
 - No source-code implementation is started.
-- Next goal can start directly on the microservice structure.
+- Next goal can start directly on the API contract.
 
 ## References
 
