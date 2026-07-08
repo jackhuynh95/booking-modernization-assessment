@@ -16,6 +16,8 @@ For Phase 3, AI assistance was used to draft the API contract for the booking mi
 
 For Phase 4, AI assistance was used to draft booking lifecycle integration events, including the common event envelope, Azure Service Bus compatibility assumptions, schema versioning, correlation and causation IDs, stable event IDs, at-least-once delivery, event-specific payload examples, outbox publishing, consumer inbox/deduplication expectations, ordering rules, retry behavior, and dead-letter handling. Human review is still required to confirm event names, payload fields, and broker assumptions match the final design direction and remain concise enough for the assessment PDF.
 
+For Group 1 reliability design, covering Phase 5 and Phase 6, AI assistance was used to draft the idempotency and eventual consistency strategy, including required idempotency keys for create/confirm/cancel/expire commands, request hash and response snapshot handling, duplicate request behavior, transactional outbox publishing, consumer inbox/deduplication, retry and dead-letter behavior, no-distributed-transaction tradeoffs, reconciliation across booking/payment/inventory/legacy/broker state, and concrete edge-case handling. Human validation is still required before final PDF submission to confirm the failure behavior is technically accurate, proportionate to the assessment scope, and consistent with the final architecture narrative.
+
 ## Allowed Uses
 
 - Drafting documentation structure.
