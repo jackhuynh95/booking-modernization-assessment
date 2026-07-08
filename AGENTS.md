@@ -2,70 +2,45 @@
 
 ## Project Intent
 
-This repository is for the `robot-fleet-dashboard` full-stack technical assignment. Treat it as a real-time robot fleet management dashboard with WebSocket telemetry ingestion, MongoDB persistence, live health monitoring, alerts, historical charts, clustering, and Docker Compose runtime.
+This repository is for `booking-modernization-assessment`, a PhoenixDX `.NET Backend Engineer` PDF-only technical design submission.
+
+The work product is a concise design document, not a runnable application. It should explain how to extract a booking microservice from a legacy system using .NET-oriented backend design, API contracts, events, idempotency, eventual consistency, observability, edge cases, and clear assessment assumptions.
 
 ## Current Phase
 
-The project is in the specification and harness phase, with boilerplate present under `apps/`.
+Foundation and roadmap setup.
 
-Do not generate backend/frontend implementation code, Dockerfiles, or CI files until the user explicitly asks for an implementation step.
+Do not generate backend/frontend implementation code, Dockerfiles, CI files, or runtime harnesses unless the user explicitly starts an implementation step. Current deliverable is documentation suitable for final PDF assembly.
 
 ## Source of Truth
 
-Use these documents before implementation decisions:
+Use these documents before making design decisions:
 
-- `docs/specs/assignment-brief.md`
-- `docs/specs/functional-spec.md`
-- `docs/specs/telemetry-contract.md`
-- `docs/specs/alert-rules.md`
-- `docs/architecture/architecture-notes.md`
-- `docs/database/mongodb-design.md`
-- `docs/api/api-and-websocket.md`
-- `docs/guardrails/development-guardrails.md`
-- `docs/development/project-structure.md`
-- `docs/operations/docker-compose.md`
-- `docs/roadmap/IMPLEMENTATION_ROADMAP.md`
-- `docs/roadmap/EPIC.md`
+- `docs/assessment-brief.md`
+- `docs/roadmap.md`
+- `docs/architecture.md`
+- `docs/api-contract.md`
+- `docs/events.md`
+- `docs/idempotency.md`
+- `docs/observability.md`
+- `docs/ai-usage-declaration.md`
+- `docs/final-submission-outline.md`
 
 ## Repository Layout
 
-- `apps/backend`: Node.js/uWebSockets.js telemetry backend.
-- `apps/frontend`: React/Next.js dashboard and robot detail UI.
-- `apps/backend/simulator`: sample simulator command.
-- `docs`: specs, architecture, API, database, operations, roadmap, evidence.
-- `docker-compose.yml`: local development runtime for frontend, backend, MongoDB, and simulator.
+- `docs/`: evergreen assessment docs and final PDF source material.
+- `README.md`: repo identity and doc index.
+- No `src/`, `apps/`, Docker Compose, package manager setup, or CI should exist during the foundation phase.
 
-## Required Stack From Assignment
+## Assessment Guardrails
 
-- Node.js.
-- React/Next.js.
-- MongoDB.
-- uWebSockets.js.
-- Docker Compose.
-
-## Implementation Guardrails
-
-- Before React/Next.js UI work, invoke and mention `react-best-practices` if available.
-- If `react-best-practices` is unavailable, state that clearly, then continue with local frontend guardrails.
-- Preserve the sample-code intent where possible; update it rather than replacing everything without reason.
-- Validate all incoming robot telemetry before storing or broadcasting.
-- Store raw/normalized telemetry in MongoDB with indexes for robot ID and time-window queries.
-- Keep alert rules deterministic and testable.
-- Keep real-time broadcast and persistence failure modes explicit.
-- Document any shortcuts or production follow-ups in `docs/decisions/`.
-- Follow the roadmap phases in `docs/roadmap/IMPLEMENTATION_ROADMAP.md`.
-
-## Continuous Documentation Rule
-
-Every implementation goal must update docs in the same pass when behavior changes. Keep these files synchronized with code:
-
-- README setup and verification notes;
-- `docs/specs/*` for functional and telemetry behavior;
-- `docs/api/api-and-websocket.md` for REST/WebSocket contracts;
-- `docs/database/mongodb-design.md` for collections, indexes, and retention;
-- `docs/architecture/architecture-notes.md` for runtime flow and scaling;
-- `docs/roadmap/*` for phase status and next work;
-- `docs/evidence/manual-test-evidence.md` when manual screenshots or video proof are captured.
+- Keep work docs-first and PDF-ready.
+- Keep scope centered on booking modernization, not full implementation.
+- Favor .NET backend terminology and pragmatic distributed-systems tradeoffs.
+- Capture assumptions separately from confirmed constraints.
+- Keep API, event, idempotency, consistency, and observability decisions synchronized across docs.
+- Record AI assistance transparently in `docs/ai-usage-declaration.md`.
+- Final submission target is a 6-page PDF plus submission email, not source code.
 
 ## Shell Rule
 
