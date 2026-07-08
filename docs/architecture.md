@@ -6,6 +6,8 @@ This document defines the Phase 2 booking microservice structure for the Phoenix
 
 The design favors a clear service boundary, explicit adapters, idempotent commands, durable outbox publishing, and staged migration. It does not assume a big-bang rewrite or direct shared ownership of legacy tables.
 
+The assessment describes Product A as Expedia-like. Therefore, the booking service is treated as a travel booking lifecycle orchestrator rather than a generic CRUD service. It coordinates booking intent, traveller references, date ranges, booking lines, availability/payment outcomes, confirmation, cancellation, and legacy synchronization while leaving specialized ownership to surrounding bounded contexts.
+
 ## Service Boundary
 
 The booking microservice owns the booking lifecycle from request through confirmation, cancellation, failure, and read-back of booking status.
@@ -13,14 +15,15 @@ The booking microservice owns the booking lifecycle from request through confirm
 | Area | Booking service owns | Remains outside during transition |
 | --- | --- | --- |
 | Booking commands | Create, confirm, cancel, expire, fail booking workflows. | Legacy UI screens may still initiate commands through API facade or strangler route. |
-| Booking state | Canonical booking aggregate state after cutover of each flow. | Historical legacy rows not yet migrated. |
-| Booking rules | Status transitions, duplicate prevention, cancellation windows, retry-safe command handling. | Pricing, payment settlement, inventory source of truth, customer profile ownership. |
+| Booking state | Canonical booking aggregate state after cutover of each flow, including travel booking lines such as stay, flight, car, package, or activity references. | Historical legacy rows not yet migrated. |
+| Booking rules | Status transitions, duplicate prevention, cancellation windows, retry-safe command handling, quote/hold expiry, and mixed-item booking lifecycle. | Pricing, payment settlement, inventory source of truth, traveller profile ownership, supplier catalog ownership. |
 | Integration | REST API, integration events, legacy DB adapter, outbox processor. | Legacy monolith internal modules and existing reporting jobs until replaced. |
 | Operations | Booking-specific logs, metrics, traces, alerts, reconciliation workers. | Platform-wide monitoring and legacy application operations. |
 
 ### Boundary Principles
 
 - Booking is extracted as a bounded context, not as a table wrapper around the legacy database.
+- Booking coordinates travel lifecycle state; it does not absorb every Expedia-like capability into one oversized service.
 - The service exposes use-case APIs instead of allowing callers to mutate booking tables directly.
 - The legacy database is treated as an integration dependency through an adapter, not as shared domain storage.
 - Cross-system consistency is eventual, with explicit state transitions and reconciliation.
@@ -127,6 +130,7 @@ The domain layer contains booking concepts and rules that must remain true regar
 Core concepts:
 
 - `Booking` aggregate root with identity, customer reference, booking lines, status, version, timestamps, and cancellation metadata.
+- `BookingLine` captures a travel item reference such as stay, flight, car, package component, or activity reservation without owning that external inventory domain.
 - `BookingStatus`: `Requested`, `PendingPayment`, `Confirmed`, `Cancelled`, `Failed`, `Expired`.
 - State transition rules, for example: `Confirmed` cannot return to `PendingPayment`; `Cancelled` is terminal except for administrative correction workflows.
 - Domain events such as `BookingRequested`, `BookingConfirmed`, `BookingCancelled`, and `BookingFailed`.
@@ -228,6 +232,9 @@ The booking service should avoid distributed transactions with payment, inventor
 | Legacy DB | Adapter for transitional reads/sync writes. | Eventually consistent during migration. |
 | Payment service/gateway | Authorization and payment outcome events. | Pending state until payment outcome known. |
 | Inventory/availability | Check and reserve/hold capacity. | Reservation timeout plus reconciliation. |
+| Traveller/customer service | Traveller profile and contact references. | Referenced by stable IDs; profile updates are separate from booking lifecycle. |
+| Communications service | Sends confirmation, cancellation, and operational notices. | Event-driven downstream consumer. |
+| Supplier/catalog services | Hotel, flight, car, package, and activity metadata. | Booking stores references/snapshots needed for audit; catalog remains external owner. |
 | Message broker | Integration event publishing from outbox. | At-least-once delivery with consumer dedupe. |
 | Reporting/search | Projections fed by events or sync. | Eventually consistent read models. |
 
@@ -247,6 +254,7 @@ The service should expose booking status clearly so clients can handle pending a
 ## Phase 2 Decisions
 
 - The booking service owns booking lifecycle use cases and canonical state for migrated bookings.
+- Expedia-like travel scope is handled through booking orchestration and item references, not by merging payment, inventory, traveller profile, communication, or supplier catalog ownership into the booking service.
 - The legacy database is accessed only through a legacy adapter during transition.
 - Application use cases coordinate domain rules, persistence, idempotency, and outbox writes.
 - Integration events are published through a durable outbox processor, not inline request publishing.
@@ -255,6 +263,7 @@ The service should expose booking status clearly so clients can handle pending a
 
 ## References
 
+- Expedia Australia: https://www.expedia.com.au/
 - `docs/assessment-brief.md`
 - `docs/api-contract.md`
 - `docs/events.md`

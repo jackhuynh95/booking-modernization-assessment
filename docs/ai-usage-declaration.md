@@ -10,7 +10,7 @@ Foundation status: placeholder created for Phase 8.
 
 AI assistance was used to organize documentation, structure the roadmap, identify design topics to cover, and improve clarity of the technical design. The final design decisions, assumptions, tradeoffs, and submission responsibility remain human-owned and human-reviewed.
 
-For Phase 2, AI assistance was used to draft the booking microservice structure, including service boundary, .NET layer responsibilities, legacy database adapter, outbox processor, background workers, transition data ownership, and migration approach. These items require human review before final PDF submission.
+For Phase 2, AI assistance was used to draft the booking microservice structure, including service boundary, .NET layer responsibilities, legacy database adapter, outbox processor, background workers, transition data ownership, and migration approach. After the Expedia-like product reference was identified, AI assistance was also used to align the design around travel booking orchestration rather than generic CRUD booking. These items require human review before final PDF submission.
 
 ## Allowed Uses
 

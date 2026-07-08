@@ -8,10 +8,10 @@ This roadmap runs from assessment understanding through final PDF export and sub
 
 | Phase | Status | Deliverable | Exit Criteria |
 | --- | --- | --- | --- |
-| 1. Understand assessment and assumptions | Complete | `docs/assessment-brief.md` | Constraints, assumptions, non-goals, and unknowns captured. |
-| 2. Booking microservice structure | Complete | `docs/architecture.md` | Service boundary, responsibilities, data ownership, dependencies, and migration approach proposed. |
-| 3. API contract | Not started | `docs/api-contract.md` | Core REST endpoints, request/response shapes, status codes, validation, and error model drafted. |
-| 4. Event definitions | Not started | `docs/events.md` | Booking event list, schemas, producers/consumers, ordering, and versioning strategy drafted. |
+| 1. Understand assessment and assumptions | Complete | `docs/assessment-brief.md` | Constraints, assumptions, non-goals, unknowns, and Expedia-like domain framing captured. |
+| 2. Booking microservice structure | Complete | `docs/architecture.md` | Service boundary, responsibilities, data ownership, dependencies, Expedia-like travel orchestration boundary, and migration approach proposed. |
+| 3. API contract | Not started | `docs/api-contract.md` | Core REST endpoints, request/response shapes, travel booking line model, status codes, validation, and error model drafted. |
+| 4. Event definitions | Not started | `docs/events.md` | Booking event list, travel booking payload references, schemas, producers/consumers, ordering, and versioning strategy drafted. |
 | 5. Idempotency and eventual consistency | Not started | `docs/idempotency.md` | Idempotency keys, deduplication, retries, outbox/inbox, reconciliation, and consistency tradeoffs defined. |
 | 6. Edge cases | Not started | Cross-doc sections | Cancellation, duplicate submission, payment timeout, inventory conflict, race conditions, partial failure, and replay behavior covered. |
 | 7. Observability plan | Not started | `docs/observability.md` | Logs, metrics, traces, alerts, dashboards, SLOs, and failure investigation paths defined. |
@@ -25,6 +25,7 @@ Start Phase 3 by drafting the booking API contract:
 
 - REST endpoint list;
 - command request shapes;
+- Expedia-like travel booking line model for stays, flights, cars, packages, and activities;
 - query response shapes;
 - validation and status code conventions;
 - idempotency key usage;

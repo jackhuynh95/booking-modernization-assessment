@@ -14,6 +14,8 @@ No runnable source-code implementation is part of this foundation phase.
 
 - User-provided goal: "Assessment Foundation & Roadmap Setup".
 - Existing `README.md` summary: ".NET 8 booking microservice extraction design for legacy modernization, event-driven architecture, idempotency, observability, and AI-assisted engineering declaration."
+- Assessment domain framing: Product A is described as an Expedia-like travel management platform.
+- External product reference checked for domain orientation: Expedia Australia shows travel capabilities such as stays, flights, cars, packages, activities, dates, travellers, room selection, trips, support, and communications.
 
 No separate assessment PDF or external brief file exists in this repository at foundation time. This document captures all known constraints from available repo and user-provided material.
 
@@ -26,6 +28,7 @@ No separate assessment PDF or external brief file exists in this repository at f
 | Output format | Final PDF-only technical design submission. |
 | Implementation status | No source-code implementation started. |
 | Architecture topic | Booking microservice extraction from legacy system. |
+| Domain framing | Booking belongs to an Expedia-like travel management platform, not a generic CRUD reservation table. |
 | Expected design topics | Microservice structure, API contract, events, idempotency, eventual consistency, edge cases, observability, AI usage declaration. |
 | Final package | 6-page PDF draft, review/polish/export, submission email. |
 
@@ -33,6 +36,8 @@ No separate assessment PDF or external brief file exists in this repository at f
 
 - Target backend platform is .NET 8 unless later assessment material says otherwise.
 - Legacy system currently owns booking data and workflows.
+- Booking is a travel lifecycle capability that may coordinate stays, flights, cars, packages, activities, travellers, dates, payments, communications, and support workflows.
+- The booking service should own booking lifecycle state and orchestration, but should not own unrelated domains such as payment settlement, inventory source of truth, traveller profile, communications, or supplier catalogs.
 - New booking service should avoid distributed transactions and use idempotent commands plus events/outbox where appropriate.
 - API consumers may include a web/mobile client, internal services, and back-office operations.
 - Final PDF should be concise enough for assessor review, with diagrams/tables preferred over long prose.
@@ -53,5 +58,6 @@ No separate assessment PDF or external brief file exists in this repository at f
 
 ## References
 
+- Expedia Australia: https://www.expedia.com.au/
 - `README.md`
 - `docs/roadmap.md`
