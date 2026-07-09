@@ -4,18 +4,22 @@
 
 This document will guide the final six-page PDF and submission email for the PhoenixDX `.NET Backend Engineer` booking modernization assessment.
 
-Phase 9 and Phase 10 status: outline ready for final PDF drafting, polish, export, and submission email packaging.
+Phase 9 and Phase 10 status: final draft, PDF export, and submission email packaging complete.
+
+Final draft source: `docs/final-submission.md`  
+Submission email draft: `docs/submission-email.md`  
+Final PDF target: `output/pdf/Jack_Huynh_Booking_Modernization_Assessment.pdf`
 
 ## Six-Page PDF Draft Plan
 
 | Page | Content |
 | --- | --- |
-| 1 | Executive summary, assessment assumptions, target outcomes, non-goals. |
-| 2 | Booking microservice boundary, responsibilities, legacy integration, migration approach. |
-| 3 | API contract summary with core endpoints, validation, errors, and idempotency usage. |
-| 4 | Event model, eventual consistency flow, outbox/inbox, retry and reconciliation strategy. |
-| 5 | Edge cases, failure modes, operational risks, mitigations, and key observability signals. |
-| 6 | Reserved space for production readiness: observability plan summary, SLO targets, incident investigation flow, AI usage declaration, responsible AI-first backend safeguards, and closing rationale. |
+| 1 | Executive summary, assumptions, Expedia-like domain framing, outcomes. |
+| 2 | Proposed booking microservice boundary, structure, legacy integration, migration approach. |
+| 3 | API contract summary with endpoints, line model, validation, errors, idempotency usage. |
+| 4 | Event definitions, envelope, eventual consistency flow, outbox/inbox, reconciliation. |
+| 5 | Idempotency strategy, edge cases, reliability controls, failure-mode behavior. |
+| 6 | Observability plan, SLO targets, AI usage declaration, closing rationale. |
 
 ## Production Readiness Space Allocation
 
