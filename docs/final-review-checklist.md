@@ -13,7 +13,7 @@ Assessment package: Group 3 - Final PDF Draft, Review, Export, And Submission Em
 | Idempotency strategy included | `docs/final-submission.md`, page 5 | Complete |
 | At least 3 edge cases included | 5 edge cases listed on page 5 | Complete |
 | Basic observability plan included | Logs, metrics, traces, alerts, dashboards, targets on page 6 | Complete |
-| AI usage declaration included | `docs/final-submission.md`, page 6 | Complete |
+| AI usage declaration maps exactly to PhoenixDX requirements | `docs/final-submission.md`, page 6 answers tools used, AI-assisted sections, manually validated items, and preventing blind AI usage; includes `.codex/skills` / .NET agent skills | Complete |
 | Expedia-like framing included | Pages 1 and 3 reference stays, flights, cars, packages, activities | Complete |
 | No source-code implementation included | Repository contains docs and output PDF only; no `src/`, `apps/`, Docker, or CI files added | Complete |
 | Submission email ready | `docs/submission-email.md` | Complete |

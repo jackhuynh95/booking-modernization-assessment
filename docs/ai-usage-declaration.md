@@ -8,48 +8,21 @@ AI was used as a drafting and review aid. The design remains human-owned: assump
 
 PhoenixDX can assess AI-first mindset responsibly by looking for transparent disclosure, source-backed assumptions, coherent engineering judgment, and evidence that generated material was reviewed rather than pasted uncritically.
 
-## AI Tools Used
+## PhoenixDX Required Disclosure
 
-| Tool | Use |
-| --- | --- |
-| OpenAI Codex / ChatGPT-style assistant | Drafted and refined documentation structure, wording, checklists, and consistency across architecture, API, events, reliability, observability, and AI disclosure. |
-| Web/reference lookup | Used only for lightweight domain framing where noted in `docs/assessment-brief.md`, such as validating Expedia-like travel capability orientation. |
+AI tools used:
+OpenAI Codex / ChatGPT-style assistant was used during this exercise. I also used project-scoped .NET agent skills installed under `.codex/skills`, including .NET architecture, modern C#, testing, coverage, and project setup related skills, to guide review checklists and terminology.
+
+AI-assisted sections:
+Roadmap, architecture structure, API contract, event model, idempotency and reliability design, observability plan, AI usage wording, final PDF compression, and completeness checks.
+
+Manually validated:
+I manually reviewed the assessment constraints, Expedia-like travel domain framing, .NET 8 microservice boundary, API and event consistency, idempotency/outbox strategy, edge cases, observability practicality, PDF page limit, and final submission quality.
+
+Preventing blind AI usage:
+In a backend team, I would require human design review, source-backed assumptions, architecture decision records for major decisions, tests for generated implementation code, security/privacy review, production-readiness checks, and a rule that no unreviewed AI output is merged into production work.
 
 No AI tool was used to generate runnable backend implementation code for this foundation phase.
-
-## Sections AI-Assisted
-
-| Section | AI-assisted contribution |
-| --- | --- |
-| Roadmap | Organized phases, deliverables, exit criteria, and final packaging path. |
-| Architecture | Drafted service boundary, .NET 8 layering, legacy DB adapter, outbox processor, background workers, migration stages, and tradeoffs. |
-| API contract | Drafted ASP.NET Core-style REST endpoints, idempotency/correlation headers, travel booking line model, response examples, validation posture, and error behavior. |
-| Events | Drafted lifecycle events, event envelope, event IDs, schema versioning, correlation/causation IDs, consumer expectations, ordering rules, retry/dead-letter behavior, and Azure Service Bus compatibility assumptions. |
-| Reliability design | Drafted idempotency records, duplicate request behavior, outbox/inbox strategy, no-distributed-transaction rationale, reconciliation, and edge-case handling. |
-| Observability wording | Drafted structured logging fields, metrics, traces, alerts, dashboards, SLO targets, and incident investigation flow. |
-
-## Manually Validated
-
-The following items require and received manual review against repository context and assessment intent:
-
-- assessment constraints: PhoenixDX `.NET Backend Engineer`, PDF-only design submission, no runnable implementation in this phase;
-- Expedia-like domain framing: booking as travel lifecycle orchestration across stays, flights, cars, packages, activities, travellers, payment, inventory, and communications;
-- .NET 8 service boundary: API/application/domain/infrastructure separation and legacy adapter boundaries;
-- event-driven consistency: booking state as canonical for migrated flows with asynchronous downstream convergence;
-- idempotency and outbox strategy: retry-safe commands, response snapshots, transactional outbox, consumer inbox/dedupe, and reconciliation;
-- PDF page-limit suitability: source docs are detailed, but final PDF must compress content into reviewer-readable diagrams, tables, and concise bullets.
-
-## Preventing Blind AI Usage In A Backend Team
-
-Responsible AI-assisted backend delivery should use AI as an accelerator, not an authority. Guardrails:
-
-- human design review before decisions become team standards;
-- source-backed assumptions, with uncertain product or platform claims labelled clearly;
-- Architecture Decision Records for major tradeoffs such as service boundary, outbox, idempotency, broker choice, and legacy migration path;
-- tests for generated code if implementation starts, including unit, integration, contract, and failure-mode tests;
-- threat/risk review for security, privacy, data leakage, payment handling, and abuse cases;
-- production-readiness checklist covering logging, metrics, tracing, alerts, SLOs, rollback, migration ownership, and incident recovery;
-- no unreviewed AI output merged into production branches, docs, runbooks, or customer-facing behavior.
 
 ## Reviewer-Safe Statement
 
@@ -59,9 +32,9 @@ The responsible AI-first mindset shown here is transparency plus verification: A
 
 ## Phase 8 Decisions
 
-- AI usage is disclosed plainly and non-defensively.
-- AI-assisted sections are named: roadmap, architecture, API contract, events, reliability design, and observability wording.
-- Manual validation covers assessment constraints, Expedia-like domain framing, .NET 8 boundary, event-driven consistency, idempotency/outbox design, and PDF suitability.
+- AI declaration maps exactly to PhoenixDX requirements: tools used, AI-assisted sections, manually validated items, and preventing blind AI usage.
+- AI tools include OpenAI Codex / ChatGPT-style assistant and project-scoped .NET agent skills under `.codex/skills`.
+- AI-assisted sections include roadmap, architecture, API, events, reliability, observability, AI wording, PDF compression, and completeness checks.
 - Backend team safeguards prevent blind AI usage through human review, source-backed assumptions, ADRs, tests, risk review, production-readiness checks, and no unreviewed AI output merged.
 
 ## References

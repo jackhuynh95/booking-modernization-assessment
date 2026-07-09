@@ -228,9 +228,17 @@ Terminal states are not silently overwritten by late events. Corrections require
 
 ### AI Usage Declaration
 
-AI was used to draft and refine structure, wording, and completeness checks across roadmap, architecture, API contract, events, idempotency, observability, and this final package. No runnable backend implementation code was generated.
+AI tools used:
+OpenAI Codex / ChatGPT-style assistant was used during this exercise. I also used project-scoped .NET agent skills installed under `.codex/skills`, including .NET architecture, modern C#, testing, coverage, and project setup related skills, to guide review checklists and terminology.
 
-The final design remains human-owned. Assumptions, tradeoffs, .NET backend suitability, page-limit fit, and submission quality were reviewed against repository context and assessment intent. Responsible team use would require human design review, source-backed assumptions, ADRs for major decisions, tests for generated code if implementation starts, security/privacy review, and no unreviewed AI output merged into production work.
+AI-assisted sections:
+Roadmap, architecture structure, API contract, event model, idempotency and reliability design, observability plan, AI usage wording, final PDF compression, and completeness checks.
+
+Manually validated:
+I manually reviewed the assessment constraints, Expedia-like travel domain framing, .NET 8 microservice boundary, API and event consistency, idempotency/outbox strategy, edge cases, observability practicality, PDF page limit, and final submission quality.
+
+Preventing blind AI usage:
+In a backend team, I would require human design review, source-backed assumptions, architecture decision records for major decisions, tests for generated implementation code, security/privacy review, production-readiness checks, and a rule that no unreviewed AI output is merged into production work.
 
 ### Closing Position
 
