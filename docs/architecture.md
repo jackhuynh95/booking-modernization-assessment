@@ -31,7 +31,43 @@ The booking microservice owns the booking lifecycle from request through confirm
 
 ## Proposed .NET 8 Internal Structure
 
-The service is organized around clean boundaries rather than technical convenience. Names below are conceptual folders/projects for the design document, not an implementation mandate for this repository.
+The final submission presents the architecture as a system-level service diagram so reviewers can quickly see clients, API, use cases, domain, persistence, legacy migration path, outbox, broker, and consumers.
+
+```text
+                    +----------------------+
+                    | Web / Mobile / Ops   |
+                    | Booking Clients      |
+                    +----------+-----------+
+                               |
+                               v
+                    +----------------------+
+                    | Booking API          |
+                    | .NET 8 / ASP.NET    |
+                    +----------+-----------+
+                               |
+                               v
+                    +----------------------+
+                    | Application Use      |
+                    | Cases + Idempotency  |
+                    +----------+-----------+
+                               |
+          +--------------------+--------------------+
+          |                    |                    |
+          v                    v                    v
++------------------+  +------------------+  +------------------+
+| Booking Domain   |  | Legacy DB        |  | Outbox / Events  |
+| Aggregate        |  | Adapter          |  | Azure ServiceBus |
++--------+---------+  +--------+---------+  +--------+---------+
+         |                     |                    |
+         v                     v                    v
++------------------+  +------------------+  +------------------+
+| Booking DB       |  | Legacy Monolith  |  | Consumers        |
+| State + Audit    |  | During Migration |  | Payment/Inventory|
++------------------+  +------------------+  | Comms/Reporting  |
+                                            +------------------+
+```
+
+The service is still organized around clean internal boundaries rather than technical convenience. Names below are conceptual folders/projects for the design document, not an implementation mandate for this repository.
 
 ```text
 BookingService/

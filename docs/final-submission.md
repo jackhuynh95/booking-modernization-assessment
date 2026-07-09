@@ -47,17 +47,40 @@ The Expedia-like domain matters because a booking can contain stays, flights, ca
 | REST API, idempotency store, outbox, reconciliation. | Legacy monolith internals and historical reporting jobs. |
 | Legacy sync adapter during transition. | Legacy schema as a domain model. |
 
-### Proposed Internal Shape
+### High-Level Booking Architecture
 
 ```text
-API -> Application Use Cases -> Domain Aggregate
-              |                     |
-              v                     v
-       Ports/Adapters        Booking Rules
-              |
-              v
- Infrastructure: Booking DB, Idempotency, Outbox,
- Legacy Adapter, Broker Publisher, Workers, Telemetry
+                    +----------------------+
+                    | Web / Mobile / Ops   |
+                    | Booking Clients      |
+                    +----------+-----------+
+                               |
+                               v
+                    +----------------------+
+                    | Booking API          |
+                    | .NET 8 / ASP.NET    |
+                    +----------+-----------+
+                               |
+                               v
+                    +----------------------+
+                    | Application Use      |
+                    | Cases + Idempotency  |
+                    +----------+-----------+
+                               |
+          +--------------------+--------------------+
+          |                    |                    |
+          v                    v                    v
++------------------+  +------------------+  +------------------+
+| Booking Domain   |  | Legacy DB        |  | Outbox / Events  |
+| Aggregate        |  | Adapter          |  | Azure ServiceBus |
++--------+---------+  +--------+---------+  +--------+---------+
+         |                     |                    |
+         v                     v                    v
++------------------+  +------------------+  +------------------+
+| Booking DB       |  | Legacy Monolith  |  | Consumers        |
+| State + Audit    |  | During Migration |  | Payment/Inventory|
++------------------+  +------------------+  | Comms/Reporting  |
+                                            +------------------+
 ```
 
 | Layer | Responsibility |
@@ -228,16 +251,20 @@ Terminal states are not silently overwritten by late events. Corrections require
 
 ### AI Usage Declaration
 
-AI tools used:
+AI Tools Used:
+
 OpenAI Codex / ChatGPT-style assistant was used during this exercise. I also used project-scoped .NET agent skills installed under `.codex/skills`, including .NET architecture, modern C#, testing, coverage, and project setup related skills, to guide review checklists and terminology.
 
-AI-assisted sections:
+Sections AI-Assisted:
+
 Roadmap, architecture structure, API contract, event model, idempotency and reliability design, observability plan, AI usage wording, final PDF compression, and completeness checks.
 
-Manually validated:
+Manually Validated:
+
 I manually reviewed the assessment constraints, Expedia-like travel domain framing, .NET 8 microservice boundary, API and event consistency, idempotency/outbox strategy, edge cases, observability practicality, PDF page limit, and final submission quality.
 
-Preventing blind AI usage:
+Preventing Blind AI Usage:
+
 In a backend team, I would require human design review, source-backed assumptions, architecture decision records for major decisions, tests for generated implementation code, security/privacy review, production-readiness checks, and a rule that no unreviewed AI output is merged into production work.
 
 ### Closing Position
